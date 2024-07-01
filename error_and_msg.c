@@ -54,7 +54,7 @@ void	msg_philos(char *msg, t_philo *philo, int id)
 	if (!philo->sim->dead)
 	{
 		pthread_mutex_lock(&philo->sim->print_lock);
-		printf("%d %d %s\n", get_time() - philo->start_time, id, msg);
+		printf("%d %d %s\n", get_current_time() - philo->start_time, id, msg);
 		pthread_mutex_unlock(&philo->sim->print_lock);
 	}
 }
