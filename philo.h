@@ -53,7 +53,7 @@ int				ft_strlen(const char *str);
 int				is_digit(const char *str);
 int				ft_atoi(const char *str);
 
-unsigned int	get_time(void);
+unsigned int	get_current_time(void);
 void			ft_sleep(unsigned int time, t_simulation *sim);
 
 int				erorr_msg(char *msg);
