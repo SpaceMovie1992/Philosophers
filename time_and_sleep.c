@@ -12,7 +12,7 @@
 
 #include "philo.h"
 
-unsigned int	get_time(void)
+unsigned int	get_current_time(void)
 {
 	struct timeval	time;
 
@@ -25,6 +25,6 @@ void	ft_sleep(unsigned int time, t_simulation *sim)
 	unsigned int	start_t;
 
 	start_t = get_time();
-	while ((get_time() - start_t < time) && data->dead == false)
+	while ((get_current_time() - start_t < time) && data->dead == false)
 		usleep(200);
 }
