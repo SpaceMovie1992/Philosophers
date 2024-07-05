@@ -6,7 +6,7 @@
 /*   By: ahusic <ahusic@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/25 19:43:20 by ahusic            #+#    #+#             */
-/*   Updated: 2024/06/29 05:52:42 by ahusic           ###   ########.fr       */
+/*   Updated: 2024/07/05 17:53:01 by ahusic           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,6 @@ int	error_msg(char *msg)
 	return (1);
 }
 
-
 void	finished(t_simulation *sim, bool all)
 {
 	int	i;
@@ -30,12 +29,9 @@ void	finished(t_simulation *sim, bool all)
 	{
 		while (i < sim->num_philos)
 		{
-			pthread_mutex_destroy(&(sim->forks));
+			pthread_mutex_destroy(sim->forks);
 			i++;
 		}
-		pthread_mutex_destroy(&sim->dead_lock);
-		pthread_mutex_destroy(&sim->print_lock);
-		pthread_mutex_destroy(&sim->eat_lock);
 	}
 	if (sim->forks != NULL)
 	{
@@ -54,7 +50,7 @@ void	msg_philos(char *msg, t_philo *philo, int id)
 	if (!philo->sim->dead)
 	{
 		pthread_mutex_lock(&philo->sim->print_lock);
-		printf("%d %d %s\n", get_current_time() - philo->start_time, id, msg);
+		printf("%ld %d %s\n", get_current_time() - philo->start_time, id, msg);
 		pthread_mutex_unlock(&philo->sim->print_lock);
 	}
 }

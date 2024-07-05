@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: ahusic <ahusic@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/06/29 05:49:17 by ahusic            #+#    #+#             */
-/*   Updated: 2024/06/29 06:15:35 by ahusic           ###   ########.fr       */
+/*   Created: 2024/07/01 18:22:01 by ahusic            #+#    #+#             */
+/*   Updated: 2024/07/01 19:04:37 by ahusic           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,14 +22,14 @@ int	philo_init(t_simulation *sim)
 		return (1);
 	sim->philo = philo;
 	i = 0;
-	while(i < sim->num_philos)
+	while (i < sim->num_philos)
 	{
 		philo[i].sim = sim;
 		philo[i].id = i + 1;
 		philo[i].eating = 0;
 		philo[i].num_meals = 0;
-		philo[i].start_time = get_time();
-		philo[i].last_meal = get_time();
+		philo[i].start_time = get_current_time();
+		philo[i].last_meal = get_current_time();
 		philo[i].right_fork = &sim->forks[i];
 		if (i == sim->num_philos - 1)
 			philo[i].left_fork = &sim->forks[0];
@@ -39,7 +39,6 @@ int	philo_init(t_simulation *sim)
 	}
 	return (0);
 }
-
 
 int	forks_init(t_simulation *sim)
 {

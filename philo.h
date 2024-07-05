@@ -6,7 +6,7 @@
 /*   By: ahusic <ahusic@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/13 16:40:10 by ahusic            #+#    #+#             */
-/*   Updated: 2024/06/25 19:47:28 by ahusic           ###   ########.fr       */
+/*   Updated: 2024/07/05 18:13:08 by ahusic           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,20 @@ int				ft_atoi(const char *str);
 unsigned int	get_current_time(void);
 void			ft_sleep(unsigned int time, t_simulation *sim);
 
-int				erorr_msg(char *msg);
+int				error_msg(char *msg);
+void			finished(t_simulation *sim, bool all);
+void			msg_philos(char *msg, t_philo *philo, int id);
+
+int				philo_init(t_simulation *sim);
+int				forks_init(t_simulation *sim);
+
+int				args_init(int argc, char **argv, t_simulation *sim);
+int				args_check(int argc, char **argv);
+
+void			sleeping(t_philo *philo);
+void			eating(t_philo *philo);
+void			thinking(t_philo *philo);
+int				dying(t_philo *philo);
+void			*philo(void *arg);
 
 #endif

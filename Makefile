@@ -4,9 +4,9 @@ CFLAGS = -Wall -Wextra -Werror -g3 -fsanitize=address
 
 BINDIR = bin
 
-SRCS = error_and_msg.c time_and_sleep.c utils.c main.c
+SRCS = error_and_msg.c init_check_args.c init_philos_forks.c philos_setd.c time_and_sleep.c utils.c ism_check.c main.c
 
-OBJS = $(SRCS:.c=$(BINDIR)/%.o)
+OBJS = $(SRCS:%.c=$(BINDIR)/%.o)
 
 all: $(NAME)
 

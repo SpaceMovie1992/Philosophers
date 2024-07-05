@@ -6,7 +6,7 @@
 /*   By: ahusic <ahusic@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/03 11:42:40 by ahusic            #+#    #+#             */
-/*   Updated: 2024/07/03 13:05:46 by ahusic           ###   ########.fr       */
+/*   Updated: 2024/07/05 17:56:41 by ahusic           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ int	args_init(int argc, char **argv, t_simulation *sim)
 	sim->die_time = ft_atoi(argv[2]);
 	sim->eat_time = ft_atoi(argv[3]);
 	sim->sleep_time = ft_atoi(argv[4]);
-	sim_dead = false;
+	sim->dead = false;
 	sim->nb_eat_times = -1;
 	if (argc == 6)
 		sim->nb_eat_times = ft_atoi(argv[5]);
