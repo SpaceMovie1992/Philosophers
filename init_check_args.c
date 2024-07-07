@@ -6,7 +6,7 @@
 /*   By: ahusic <ahusic@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/03 11:42:40 by ahusic            #+#    #+#             */
-/*   Updated: 2024/07/05 17:56:41 by ahusic           ###   ########.fr       */
+/*   Updated: 2024/07/07 15:13:08 by ahusic           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ int	args_check(int argc, char **argv)
 {
 	int	i;
 
-	i = 0;
+	i = 1;
 	while (i < argc)
 	{
 		if (!is_digit(argv[i]))
@@ -45,8 +45,6 @@ int	args_check(int argc, char **argv)
 	if (ft_atoi(argv[1]) < 1)
 		return (1);
 	if (ft_atoi(argv[1]) > 200)
-		return (1);
-	if (ft_atoi(argv[1]) < 60)
 		return (1);
 	if (ft_atoi(argv[2]) < 60)
 		return (1);

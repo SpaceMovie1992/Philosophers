@@ -6,7 +6,7 @@
 /*   By: ahusic <ahusic@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/04 17:39:20 by ahusic            #+#    #+#             */
-/*   Updated: 2024/07/05 17:56:54 by ahusic           ###   ########.fr       */
+/*   Updated: 2024/07/07 16:27:12 by ahusic           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,24 +50,26 @@ void	thinking(t_philo *philo)
 	msg_philos("is thinking", philo, philo->id);
 }
 
-int	dying(t_philo *philo)
-{
-	int	is_dead;
+// int	dying(t_philo *philo)
+// {
+// 	int	is_dead;
 
-	pthread_mutex_lock(&philo->sim->dead_lock);
-	if (philo->sim->dead == true)
-		is_dead = 1;
-	else
-		is_dead = 0;
-	pthread_mutex_unlock(&philo->sim->dead_lock);
-	return (is_dead);
-}
+// 	pthread_mutex_lock(&philo->sim->dead_lock);
+// 	if (philo->sim->dead == true)
+// 		is_dead = 1;
+// 	else
+// 		is_dead = 0;
+// 	pthread_mutex_unlock(&philo->sim->dead_lock);
+// 	return (is_dead);
+// }
 
 void	*philo(void *arg)
 {
 	t_philo	*philo_data;
 
 	philo_data = (t_philo *)arg;
+	if (!philo_data || !philo_data->sim)
+		return (NULL);
 	philo_data->start_time = get_current_time();
 	if (philo_data->sim->num_philos == 1)
 	{
@@ -79,7 +81,7 @@ void	*philo(void *arg)
 	}
 	if (philo_data->id % 2 != 0)
 		ft_sleep(philo_data->sim->eat_time, philo_data->sim);
-	while (philo_data->sim->dead == false)
+	while (!philo_data->sim->dead)
 	{
 		eating(philo_data);
 		sleeping(philo_data);

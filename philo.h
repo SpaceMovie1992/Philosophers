@@ -6,7 +6,7 @@
 /*   By: ahusic <ahusic@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/13 16:40:10 by ahusic            #+#    #+#             */
-/*   Updated: 2024/07/05 18:13:08 by ahusic           ###   ########.fr       */
+/*   Updated: 2024/07/07 14:58:38 by ahusic           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,5 +71,12 @@ void			eating(t_philo *philo);
 void			thinking(t_philo *philo);
 int				dying(t_philo *philo);
 void			*philo(void *arg);
+
+int				if_all_ate(t_simulation *sim);
+int				meal_time(t_simulation *sim);
+void			check_if_dead(t_simulation *sim);
+int				start(t_simulation *sim);
+
+int				main(int argc, char **argv);
 
 #endif
