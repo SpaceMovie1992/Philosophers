@@ -6,7 +6,7 @@
 /*   By: ahusic <ahusic@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/05 18:13:40 by ahusic            #+#    #+#             */
-/*   Updated: 2024/07/07 16:24:00 by ahusic           ###   ########.fr       */
+/*   Updated: 2024/07/08 19:56:55 by ahusic           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,22 +14,26 @@
 
 int	if_all_ate(t_simulation *sim)
 {
-	int	i;
-	int	all_ate;
+	int		i;
+	int		all_ate;
+	t_philo	*philo_d;
 
 	i = 0;
-	all_ate = 1;
+	all_ate = 0;
+	philo_d = sim->philo;
 	if (sim->nb_eat_times == -1)
 		return (0);
 	while (i < sim->num_philos)
 	{
 		pthread_mutex_lock(&sim->eat_lock);
-		if (sim->philo[i].num_meals < sim->nb_eat_times)
-			all_ate = 0;
+		if (philo_d[i].num_meals >= sim->nb_eat_times)
+			all_ate++;
 		pthread_mutex_unlock(&sim->eat_lock);
 		i++;
 	}
-	return (all_ate);
+	if (all_ate == sim->num_philos)
+		return (1);
+	return (0);
 }
 
 int	meal_time(t_simulation *sim)
@@ -47,6 +51,7 @@ int	meal_time(t_simulation *sim)
 		if (rn - philo_d[i].last_meal
 			>= sim->die_time && !philo_d[i].eating)
 		{
+			pthread_mutex_unlock(&sim->eat_lock);
 			msg_philos("died", &philo_d[i], philo_d[i].id);
 			return (1);
 		}
@@ -58,10 +63,10 @@ int	meal_time(t_simulation *sim)
 
 void	check_if_dead(t_simulation *sim)
 {
-	// pthread_mutex_lock(&sim->dead_lock);
+	pthread_mutex_lock(&sim->dead_lock);
 	while (!sim->dead)
 	{
-		// pthread_mutex_unlock(&sim->dead_lock);
+		pthread_mutex_unlock(&sim->dead_lock);
 		if (meal_time(sim) || if_all_ate(sim))
 		{
 			pthread_mutex_lock(&sim->dead_lock);
@@ -69,9 +74,9 @@ void	check_if_dead(t_simulation *sim)
 			pthread_mutex_unlock(&sim->dead_lock);
 			break ;
 		}
-		// pthread_mutex_lock(&sim->dead_lock);
+		pthread_mutex_lock(&sim->dead_lock);
 	}
-	// pthread_mutex_unlock(&sim->dead_lock);
+	pthread_mutex_unlock(&sim->dead_lock);
 }
 
 int	start(t_simulation *sim)

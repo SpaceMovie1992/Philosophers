@@ -6,7 +6,7 @@
 /*   By: ahusic <ahusic@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/04 17:39:20 by ahusic            #+#    #+#             */
-/*   Updated: 2024/07/07 16:27:12 by ahusic           ###   ########.fr       */
+/*   Updated: 2024/07/08 17:20:24 by ahusic           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,18 +50,18 @@ void	thinking(t_philo *philo)
 	msg_philos("is thinking", philo, philo->id);
 }
 
-// int	dying(t_philo *philo)
-// {
-// 	int	is_dead;
+int	dying(t_philo *philo)
+{
+	int	is_dead;
 
-// 	pthread_mutex_lock(&philo->sim->dead_lock);
-// 	if (philo->sim->dead == true)
-// 		is_dead = 1;
-// 	else
-// 		is_dead = 0;
-// 	pthread_mutex_unlock(&philo->sim->dead_lock);
-// 	return (is_dead);
-// }
+	pthread_mutex_lock(&philo->sim->dead_lock);
+	if (philo->sim->dead == true)
+		is_dead = 1;
+	else
+		is_dead = 0;
+	pthread_mutex_unlock(&philo->sim->dead_lock);
+	return (is_dead);
+}
 
 void	*philo(void *arg)
 {
